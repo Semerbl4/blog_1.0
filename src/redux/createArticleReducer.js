@@ -36,7 +36,7 @@ const createArticleReducer = (state = initialState, action) => {
     case 'ADD_TAG':
       if (Array.isArray(action.payload)) {
         newState.tags = [...action.payload];
-      } else {
+      } else if (action.payload !== '') {
         newState.tags = [...newState.tags, action.payload];
       }
 

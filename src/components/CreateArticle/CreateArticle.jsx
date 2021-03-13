@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -30,6 +30,8 @@ const CreateArticle = ({
   match,
 }) => {
   const { body, description, title, tagList } = article;
+  
+  const [ submitDisabled, setSubmitDisabled ] = useState(false)
 
   useEffect(() => {
     clearCreateArticleReducer();
@@ -54,7 +56,7 @@ const CreateArticle = ({
   const addTagButton = cn(CreateArticleStyles.tagButtonsCommon, CreateArticleStyles.addTagButton);
 
   const onSubmit = (data) => {
-    // console.log(data)
+    setSubmitDisabled(true)
     if (Object.keys(article).length > 0) {
       putUpdateArticle(data.title, data.description, data.text, tags, match.params.slug, token);
     } else {
@@ -156,7 +158,7 @@ const CreateArticle = ({
             title="add writen tag"
           />
         </div>
-        <input className={CreateArticleStyles.submit} type="submit" value="Send" />
+        <input className={CreateArticleStyles.submit} type="submit" value="Send" disabled={submitDisabled}/>
       </form>
     </div>
   );
