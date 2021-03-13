@@ -1,0 +1,232 @@
+$info-color: #1890ff;
+$background-color: #ffffff;
+$error: #f5222d;
+$succes: #52c41a;
+$grey: #595959;
+$transitionTime: 0.2s;
+
+.article {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 26px;
+  padding: 15px 14px 0px 19px;
+  background-color: #ffffff;
+  width: 941px;
+  min-height: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px gray;
+}
+
+.post {
+  width: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.title {
+  margin: 0;
+  margin-right: 13px;
+  font-size: 20px;
+  color: $info-color;
+  transition: $transitionTime;
+}
+
+.linkToArticle:hover .title,
+.linkToArticle:focus .title {
+  filter: brightness(130%);
+}
+
+.likesContainer {
+  position: relative;
+  top: 2px;
+  display: flex;
+  border: none;
+  margin-top: 2px;
+}
+
+.likesButton {
+  cursor: pointer;
+  width: 16px;
+  background-color: $background-color;
+  border: none;
+  padding: 0px !important;
+  margin-right: 5px;
+  outline: none;
+}
+
+.likesButton:focus {
+  outline: solid 1px $grey;
+}
+
+.background {
+  background-repeat: no-repeat;
+  background-position: 0px 4px;
+}
+
+.notLiked {
+  background-image: url(../../imgs/notLiked.svg);
+}
+
+.liked {
+  background-image: url(../../imgs/liked.svg);
+}
+
+.likesCount {
+  margin: 0;
+}
+
+.tags {
+  padding: 0;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.tag {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  line-height: 14.52px;
+  padding: 2px 6px 3px 5px;
+  margin-right: 5px;
+}
+
+.content {
+  margin: 0;
+  line-height: 22px;
+  width: 682px;
+}
+
+.mainText {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.person {
+  display: flex;
+  position: absolute;
+  right: 14px;
+  top: 15px;
+}
+
+.personInfo {
+  margin-right: 12px;
+}
+
+.personName {
+  margin-top: 0px;
+  margin-bottom: 2px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.personDate {
+  margin: 0;
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.buttonsContainer {
+  position: absolute;
+  right: 14px;
+  top: 93px;
+}
+
+.buttonsCommon {
+  margin-left: 19px;
+  border-radius: 4px;
+  border: solid 1px;
+  height: 31.1px;
+  background-color: $background-color;
+  cursor: pointer;
+}
+
+.btnDelete {
+  color: $error;
+  border-color: $error;
+  width: 78px;
+}
+
+.btnEdit {
+  color: $succes;
+  border-color: $succes;
+  width: 65.23px;
+  margin-left: 12px;
+}
+
+.error {
+  display: block !important;
+  width: 50%;
+}
+
+.confirmContainer {
+  position: absolute;
+  z-index: 5;
+  width: 240px;
+  height: 104px;
+  background-color: $background-color;
+  right: -170px;
+  top: 0px;
+  box-shadow: 0px 0px 10px 0px gray;
+  padding: 12px 16px 12px 40px;
+}
+
+.confirmContainer::before {
+  content: '';
+  display: block;
+  background-color: $background-color;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  top: 10px;
+  left: -6px;
+  transform: rotate(45deg);
+}
+
+.confirmQuestion {
+  color: $grey;
+  margin-bottom: 12px;
+}
+
+.confirmContainer::after {
+  content: '';
+  background-image: url('../../imgs/atention.svg');
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: 17px;
+  top: 20px;
+}
+
+.confirmBtnsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirmBtnsCommon {
+  padding: 1px 8px;
+  background-color: $background-color;
+  border-radius: 4px;
+  margin-left: 8px;
+  border: 1px solid #d9d9d9;
+  background-color: $background-color;
+  color: $grey;
+}
+
+.confirmBtnsCommon:hover {
+  border-color: $info-color;
+  background-color: $info-color;
+  color: $background-color;
+}

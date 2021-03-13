@@ -1,0 +1,33 @@
+$componentBackground: #ffffff;
+$succesColor: #52c41a;
+$decorative-color: #1890ff;
+$transitionTime: 0.2s;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background-color: $componentBackground;
+  height: 80px;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 0 22px 0 22px;
+}
+
+.titleContainer {
+  width: 147px;
+  height: 56px;
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  color: #000000;
+  transition: $transitionTime;
+}
+
+.linkToMain:hover .title,
+.linkToMain:focus .title {
+  color: $decorative-color;
+}
