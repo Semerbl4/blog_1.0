@@ -1,24 +1,23 @@
+/* eslint-disable no-param-reassign */
 const initialState = {
   currentPage: 1,
   articles: [],
   articlesLoading: false,
 };
 
-const reducer = (state = initialState, action) => {
-  const newState = { ...state };
-
+const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'SET_ARTICLES_LOADING':
-      newState.articlesLoading = !newState.articlesLoading;
-      return newState;
+      state.articlesLoading = !state.articlesLoading;
+      return { ...state };
 
     case 'SET_PAGE':
-      newState.currentPage = action.payload;
-      return newState;
+      state.currentPage = action.payload;
+      return { ...state };
 
     case 'SET_ARTICLES_FOR_PAGE':
-      newState.articles = action.payload;
-      return newState;
+      state.articles = action.payload;
+      return { ...state };
 
     default:
       return state;

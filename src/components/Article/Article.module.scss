@@ -139,6 +139,7 @@ $transitionTime: 0.2s;
 }
 
 .buttonsContainer {
+  display: flex;
   position: absolute;
   right: 14px;
   top: 93px;
@@ -157,13 +158,43 @@ $transitionTime: 0.2s;
   color: $error;
   border-color: $error;
   width: 78px;
+  transition: $transitionTime;
+  outline: none;
+}
+
+.btnDelete:hover,
+.btnDelete:focus {
+  background-color: $error;
+  color: $background-color;
+}
+
+.btnDelete:active {
+  box-shadow: 5px 5px 5px grey;
 }
 
 .btnEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: $succes;
   border-color: $succes;
   width: 65.23px;
   margin-left: 12px;
+  transition: $transitionTime;
+}
+
+.btnEdit:hover,
+.btnEdit:focus {
+  background-color: $succes;
+  color: $background-color;
+}
+
+.btnEdit:active {
+  box-shadow: 5px 5px 5px grey;
+}
+
+.btnEdit p {
+  margin-bottom: 0;
 }
 
 .error {
@@ -223,10 +254,18 @@ $transitionTime: 0.2s;
   border: 1px solid #d9d9d9;
   background-color: $background-color;
   color: $grey;
+  outline: none;
+  transition: $transitionTime;
+  cursor: pointer;
 }
 
-.confirmBtnsCommon:hover {
+.confirmBtnsCommon:hover,
+.confirmBtnsCommon:focus {
   border-color: $info-color;
   background-color: $info-color;
   color: $background-color;
+}
+
+.confirmBtnsCommon:active {
+  box-shadow: 5px 5px 5px grey;
 }

@@ -1,27 +1,26 @@
+/* eslint-disable no-param-reassign */
 const initialState = {
   unexpectedError: 0,
   succes: false,
   showConfirm: false,
 };
 
-const deleteArticleReducer = (state = initialState, action) => {
-  const newState = { ...state };
-
+const deleteArticleReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'CLEAR_DELETE_ARTICLE_REDUCER':
       return initialState;
 
     case 'TOOGLE_SHOW_DELETE_CONFIRM':
-      newState.showConfirm = !newState.showConfirm;
-      return newState;
+      state.showConfirm = !state.showConfirm;
+      return { ...state };
 
     case 'SET_DELETE_ARTICLE_SUCCES':
-      newState.succes = true;
-      return newState;
+      state.succes = true;
+      return { ...state };
 
     case 'SET_DELETE_ARTICLE_ERR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     default:
       return state;

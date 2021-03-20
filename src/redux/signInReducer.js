@@ -1,22 +1,21 @@
-const initialValue = {
+/* eslint-disable no-param-reassign */
+const initialState = {
   passOrEmailIncorrect: false,
   unexpectedError: 0,
 };
 
-const signInReducer = (state = initialValue, action) => {
-  const newState = { ...state };
-
+const signInReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'SET_SIGN_IN_PASSWORD_OR_EMAIL_INCORRECT':
-      newState.passOrEmailIncorrect = true;
-      return newState;
+      state.passOrEmailIncorrect = true;
+      return { ...state };
 
     case 'SET_SIGN_IN_UNEXPECTED_ERR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     case 'CLEAN_SIGN_IN_REDUCER':
-      return { ...initialValue };
+      return { ...initialState };
 
     default:
       return state;

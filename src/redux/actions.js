@@ -1,119 +1,122 @@
 import {
-  deleteUserType,
-  setPageType,
-  setArticlesType,
-  setArticlesLoadingType,
-  setErrorGetArticlesType,
-  setSignUpUsernameType,
-  setSignUpEmailType,
-  setSignUpPasswordType,
-  setSignUpRepeatPasswordType,
-  toogleSignUpAgreementType,
-  clearSignUpReducerType,
-  setSignInPassOrEmailIncorrectType,
-  cleanSignInReducerType,
-  setEditProfileSuccesType,
-  setSignInUnexpectedErrType,
-  setEditProfileUnexpectedErrorType,
-  clearEditProfileReducerType,
-  setSignInEmailType,
-  setSignInPasswordType,
-  setLogedUserType,
-  setSignUpErrorsType,
-  setEditProfileErrorsType,
-  setUnexpectedErrorType,
-  addTagType,
-  setTypedInTagType,
-  clearTypedInTagType,
-  deleteLastTagType,
-  setCreateArticleSuccesType,
-  setCreateArticleUnexpectedErrorType,
-  setArticleType,
-  clearArticleType,
-  setArticelNotFoundType,
-  setArticleUnexpectedErrorType,
-  setDeleteArticleErrType,
-  setDeleteArticleSuccesType,
-  toogleShowDeleteConfirmType,
-  clearDeleteArticleReducerType,
-  clearCreateArticleReducerType,
+  DELETE_LOGED_USER_TYPE,
+  SET_PAGE_TYPE,
+  SET_ARTICLES_FOR_PAGE_TYPE,
+  SET_ARTICLES_LOADING_TYPE,
+  ERROR_GET_ARTICLES_FOR_PAGE_TYPE,
+  SET_SIGN_UP_USERNAME_TYPE,
+  SET_SIGN_UP_EMAIL_TYPE,
+  SIGN_UP_PASSWORD_TYPE,
+  SIGN_UP_REPEAT_PASSWORD_TYPE,
+  TOOGLE_SIGN_UP_AGREEMENT_TYPE,
+  CLEAR_SIGN_UP_REDUCER_TYPE,
+  SET_SIGN_IN_PASSWORD_OR_EMAIL_INCORRECT_TYPE,
+  CLEAN_SIGN_IN_REDUCER_TYPE,
+  SET_EDIT_PROFILE_SUCCES_TYPE,
+  SET_SIGN_IN_UNEXPECTED_ERROR_TYPE,
+  SET_EDIT_PROFILE_UNEXPECTED_ERROR_TYPE,
+  CLEAR_EDIT_PROFILE_REDUCER_TYPE,
+  SET_SIGN_IN_EMAIL_TYPE,
+  SET_SIGN_IN_PASSWORD_TYPE,
+  SET_LOGED_USER_TYPE,
+  SET_SIGN_UP_ERRORS_TYPE,
+  SET_EDIT_PROFILE_ERRORS_TYPE,
+  SET_UNEXPECTED_ERROR_TYPE,
+  ADD_TAG_TYPE,
+  SET_TYPED_IN_TAG_TYPE,
+  CLEAR_TYPED_IN_TAG_TYPE,
+  DELETE_LAST_TAG_TYPE,
+  SET_CREATE_ARTICLE_SUCCES_TYPE,
+  SET_CREATE_ARTICLE_UNEXPECTED_ERROR_TYPE,
+  SET_ARTICLE_TYPE,
+  CLEAR_ARTICLE_TYPE,
+  SET_ARTICLE_NOT_FOUND_TYPE,
+  SET_ARTICLE_UNEXPECTED_ERROR_TYPE,
+  SET_DELETE_ARTICLE_ERR_TYPE,
+  SET_DELETE_ARTICLE_SUCCES_TYPE,
+  TOOGLE_SHOW_DELETE_CONFIRM_TYPE,
+  CLEAR_DELETE_ARTICLE_REDUCER_TYPE,
+  CLEAR_CREATE_ARTICLE_REDUCER_TYPE,
 } from './actionsType';
 
-export const deleteLoggedUser = () => ({ type: deleteUserType });
+export const deleteLoggedUser = () => ({ type: DELETE_LOGED_USER_TYPE });
 
-export const setPage = (page) => ({ type: setPageType, payload: page });
+export const setPage = (page) => ({ type: SET_PAGE_TYPE, payload: page });
 
-export const setArticlesForPage = (articles) => ({ type: setArticlesType, payload: articles });
+export const setArticlesForPage = (articles) => ({ type: SET_ARTICLES_FOR_PAGE_TYPE, payload: articles });
 
-export const setArticlesLoading = () => ({ type: setArticlesLoadingType });
+export const setArticlesLoading = () => ({ type: SET_ARTICLES_LOADING_TYPE });
 
-export const setErrGetArtForPage = () => ({ type: setErrorGetArticlesType });
+export const setErrGetArtForPage = () => ({ type: ERROR_GET_ARTICLES_FOR_PAGE_TYPE });
 
-export const setSignUpUsername = (usn) => ({ type: setSignUpUsernameType, payload: usn });
+export const setSignUpUsername = (usn) => ({ type: SET_SIGN_UP_USERNAME_TYPE, payload: usn });
 
-export const setSignUpEmail = (mail) => ({ type: setSignUpEmailType, payload: mail });
+export const setSignUpEmail = (mail) => ({ type: SET_SIGN_UP_EMAIL_TYPE, payload: mail });
 
-export const setSignUpPassword = (pas) => ({ type: setSignUpPasswordType, payload: pas });
+export const setSignUpPassword = (pas) => ({ type: SIGN_UP_PASSWORD_TYPE, payload: pas });
 
-export const setSignUpRepeatPassword = (pas) => ({ type: setSignUpRepeatPasswordType, payload: pas });
+export const setSignUpRepeatPassword = (pas) => ({ type: SIGN_UP_REPEAT_PASSWORD_TYPE, payload: pas });
 
-export const toogleAgreement = () => ({ type: toogleSignUpAgreementType });
+export const toogleAgreement = () => ({ type: TOOGLE_SIGN_UP_AGREEMENT_TYPE });
 
-export const clearSignUpReducer = () => ({ type: clearSignUpReducerType });
+export const clearSignUpReducer = () => ({ type: CLEAR_SIGN_UP_REDUCER_TYPE });
 
-export const setSignInPassOrEmailIncorrect = () => ({ type: setSignInPassOrEmailIncorrectType });
+export const setSignInPassOrEmailIncorrect = () => ({ type: SET_SIGN_IN_PASSWORD_OR_EMAIL_INCORRECT_TYPE });
 
-export const cleanSignInReducer = () => ({ type: cleanSignInReducerType });
+export const cleanSignInReducer = () => ({ type: CLEAN_SIGN_IN_REDUCER_TYPE });
 
-export const setEditProfileSucces = () => ({ type: setEditProfileSuccesType });
+export const setEditProfileSucces = () => ({ type: SET_EDIT_PROFILE_SUCCES_TYPE });
 
-export const setSignInUnexpectedErr = (err) => ({ type: setSignInUnexpectedErrType, payload: err });
+export const setSignInUnexpectedErr = (err) => ({ type: SET_SIGN_IN_UNEXPECTED_ERROR_TYPE, payload: err });
 
-export const setEditProfileUnexpectedError = (err) => ({ type: setEditProfileUnexpectedErrorType, payload: err });
+export const setEditProfileUnexpectedError = (err) => ({ type: SET_EDIT_PROFILE_UNEXPECTED_ERROR_TYPE, payload: err });
 
-export const clearEditProfileReducer = () => ({ type: clearEditProfileReducerType });
+export const clearEditProfileReducer = () => ({ type: CLEAR_EDIT_PROFILE_REDUCER_TYPE });
 
-export const setSignInEmail = (mail) => ({ type: setSignInEmailType, payload: mail });
+export const setSignInEmail = (mail) => ({ type: SET_SIGN_IN_EMAIL_TYPE, payload: mail });
 
-export const setSignInPassword = (pas) => ({ type: setSignInPasswordType, payload: pas });
+export const setSignInPassword = (pas) => ({ type: SET_SIGN_IN_PASSWORD_TYPE, payload: pas });
 
-export const setLogedUser = (user) => ({ type: setLogedUserType, payload: user });
+export const setLogedUser = (user) => ({ type: SET_LOGED_USER_TYPE, payload: user });
 
-export const setSignUpErrors = (err) => ({ type: setSignUpErrorsType, payload: err });
+export const setSignUpErrors = (err) => ({ type: SET_SIGN_UP_ERRORS_TYPE, payload: err });
 
-export const setEditProfileErrors = (err) => ({ type: setEditProfileErrorsType, payload: err });
+export const setEditProfileErrors = (err) => ({ type: SET_EDIT_PROFILE_ERRORS_TYPE, payload: err });
 
-export const setUnexpectedError = (unerr) => ({ type: setUnexpectedErrorType, payload: unerr });
+export const setUnexpectedError = (unerr) => ({ type: SET_UNEXPECTED_ERROR_TYPE, payload: unerr });
 
-export const addTag = (tag) => ({ type: addTagType, payload: tag });
+export const addTag = (tag) => ({ type: ADD_TAG_TYPE, payload: tag });
 
-export const setTypedInTag = (tag) => ({ type: setTypedInTagType, payload: tag });
+export const setTypedInTag = (tag) => ({ type: SET_TYPED_IN_TAG_TYPE, payload: tag });
 
-export const clearTypedInTag = () => ({ type: clearTypedInTagType });
+export const clearTypedInTag = () => ({ type: CLEAR_TYPED_IN_TAG_TYPE });
 
-export const deleteLastTag = () => ({ type: deleteLastTagType });
+export const deleteLastTag = () => ({ type: DELETE_LAST_TAG_TYPE });
 
-export const setCreateArticleSucces = () => ({ type: setCreateArticleSuccesType });
+export const setCreateArticleSucces = () => ({ type: SET_CREATE_ARTICLE_SUCCES_TYPE });
 
-export const setCreateArticleUnexpectedError = (err) => ({ type: setCreateArticleUnexpectedErrorType, payload: err });
+export const setCreateArticleUnexpectedError = (err) => ({
+  type: SET_CREATE_ARTICLE_UNEXPECTED_ERROR_TYPE,
+  payload: err,
+});
 
-export const setArticle = (article) => ({ type: setArticleType, payload: article });
+export const setArticle = (article) => ({ type: SET_ARTICLE_TYPE, payload: article });
 
-export const clearArticle = () => ({ type: clearArticleType });
+export const clearArticle = () => ({ type: CLEAR_ARTICLE_TYPE });
 
-export const setArticleNotFound = () => ({ type: setArticelNotFoundType });
+export const setArticleNotFound = () => ({ type: SET_ARTICLE_NOT_FOUND_TYPE });
 
-export const setArticleUnexpectedError = (err) => ({ type: setArticleUnexpectedErrorType, payload: err });
+export const setArticleUnexpectedError = (err) => ({ type: SET_ARTICLE_UNEXPECTED_ERROR_TYPE, payload: err });
 
-export const setDeleteArticleErr = (err) => ({ type: setDeleteArticleErrType, payload: err });
+export const setDeleteArticleErr = (err) => ({ type: SET_DELETE_ARTICLE_ERR_TYPE, payload: err });
 
-export const setDeleteArticleSucces = () => ({ type: setDeleteArticleSuccesType });
+export const setDeleteArticleSucces = () => ({ type: SET_DELETE_ARTICLE_SUCCES_TYPE });
 
-export const toogleShowDeleteConfirm = () => ({ type: toogleShowDeleteConfirmType });
+export const toogleShowDeleteConfirm = () => ({ type: TOOGLE_SHOW_DELETE_CONFIRM_TYPE });
 
-export const clearDeleteArticleReducer = () => ({ type: clearDeleteArticleReducerType });
+export const clearDeleteArticleReducer = () => ({ type: CLEAR_DELETE_ARTICLE_REDUCER_TYPE });
 
-export const clearCreateArticleReducer = () => ({ type: clearCreateArticleReducerType });
+export const clearCreateArticleReducer = () => ({ type: CLEAR_CREATE_ARTICLE_REDUCER_TYPE });
 
 export const deleteArticle = (slug, token) => async (dispatch) => {
   let resp = await fetch(`https://conduit.productionready.io/api/articles/${slug}`, {
@@ -131,7 +134,6 @@ export const deleteArticle = (slug, token) => async (dispatch) => {
     dispatch(setDeleteArticleSucces());
   } else {
     dispatch(setDeleteArticleErr(resp.status));
-    // console.log(resp)
   }
 };
 
@@ -146,8 +148,6 @@ export const getArticle = (slug) => async (dispatch) => {
   if (resp.status === 404) {
     dispatch(setArticleNotFound());
   } else if (resp.status) {
-    // console.log('не удалось получить артикль')
-    // console.log(resp.status)
     dispatch(setArticleUnexpectedError(resp.status));
   }
 };
@@ -156,9 +156,9 @@ export const getArticlesForPage = (page) => async (dispatch) => {
   dispatch(setArticlesLoading());
   let skippedArticles = 0;
   if (page > 1) {
-    skippedArticles = 5 * (page - 1);
+    skippedArticles = 10 * (page - 1);
   }
-  let resp = await fetch(`https://conduit.productionready.io/api/articles?limit=5&offset=${skippedArticles}`);
+  let resp = await fetch(`https://conduit.productionready.io/api/articles?limit=10&offset=${skippedArticles}`);
   if (resp.ok) {
     resp = await resp.json();
     dispatch(setArticlesLoading());
@@ -188,29 +188,23 @@ export const postSignUp = (usn, mail, pas) => async (dispatch) => {
 
   if (resp.ok) {
     resp = await resp.json();
-    // console.log(resp)
     dispatch(setLogedUser(resp));
     dispatch(setEditProfileSucces());
   } else if (resp.status === 422) {
-    // console.log(resp)
     resp = await resp.json();
     dispatch(setSignUpErrors(resp.errors));
-    // console.log(resp)
   } else {
     dispatch(setUnexpectedError(resp.status));
   }
 };
 
 export const postSignIn = (mail, pas) => async (dispatch) => {
-  // console.log([mail, pas])
   const signInData = {
     user: {
       email: mail,
       password: pas,
     },
   };
-
-  // console.log(JSON.stringify(signInData))
 
   let resp = await fetch('https://conduit.productionready.io/api/users/login', {
     method: 'POST',
@@ -223,11 +217,8 @@ export const postSignIn = (mail, pas) => async (dispatch) => {
   if (resp.ok) {
     resp = await resp.json();
     dispatch(setLogedUser(resp));
-    // console.log('ok')
   } else if (resp.status === 422) {
     resp = await resp.json();
-    // console.log(resp)
-    // console.log([mail, pas])
     dispatch(setSignInPassOrEmailIncorrect());
   } else {
     dispatch(setSignInUnexpectedErr(resp.status));
@@ -260,19 +251,14 @@ export const putUpdateUser = (username, email, password, image, token) => async 
     body: JSON.stringify(updateUserData),
   });
 
-  // console.log(resp)
-
   if (resp.ok) {
     resp = await resp.json();
-    // console.log(resp)
     dispatch(setLogedUser(resp));
     dispatch(setEditProfileSucces());
   } else if (resp.status === 422) {
     resp = await resp.json();
-    // console.log(resp)
     dispatch(setEditProfileErrors(resp.errors));
   } else {
-    // console.log(resp.status);
     dispatch(setEditProfileUnexpectedError(resp.status));
   }
 };
@@ -290,8 +276,6 @@ export const postCreateArticle = (title, description, body, tagList, token) => a
     createArticleData.article.tagList = tagList;
   }
 
-  // console.log(createArticleData)
-
   let resp = await fetch('https://conduit.productionready.io/api/articles', {
     method: 'POST',
     headers: {
@@ -304,7 +288,6 @@ export const postCreateArticle = (title, description, body, tagList, token) => a
   if (resp.ok) {
     dispatch(setCreateArticleSucces());
     resp = await resp.json();
-    // console.log(resp)
   } else {
     dispatch(setCreateArticleUnexpectedError(resp.status));
   }
@@ -347,6 +330,5 @@ export const postFavoriteArticle = (slug, token, favorited) => async () => {
 
   if (resp.ok) {
     resp = await resp.json();
-    // console.log(resp)
   }
 };

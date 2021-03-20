@@ -6,18 +6,34 @@ import { Spin, Alert } from 'antd';
 
 import * as actions from '../../redux/actions';
 
+import { getArticle } from '../../services/api';
+
 import Article from '../Article/Article';
 
 import 'antd/dist/antd.css';
 import openedArticleStyles from './OpenedArticle.module.scss';
 
-const OpenedArticle = ({ getArticle, clearArticle, match, article, notFound, unexpectedError }) => {
-  // console.log(unexpectedError)
-
+const OpenedArticle = ({
+  clearArticle,
+  match,
+  article,
+  notFound,
+  unexpectedError,
+  setArticle,
+  setArticleNotFound,
+  setArticleUnexpectedError,
+}) => {
   useEffect(() => {
     clearArticle();
-    // console.log(match.params.slug)
-    getArticle(match.params.slug);
+    getArticle(match.params.slug)
+      .then((resp) => setArticle(resp.article))
+      .catch((err) => {
+        console.log(err);
+        if (+err.message === 404) {
+          setArticleNotFound();
+        }
+        setArticleUnexpectedError(+err.message);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,7 +71,6 @@ const OpenedArticle = ({ getArticle, clearArticle, match, article, notFound, une
 };
 
 OpenedArticle.propTypes = {
-  getArticle: PropTypes.func.isRequired,
   clearArticle: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
@@ -63,6 +78,9 @@ OpenedArticle.propTypes = {
   article: PropTypes.object.isRequired,
   notFound: PropTypes.bool.isRequired,
   unexpectedError: PropTypes.number.isRequired,
+  setArticle: PropTypes.func.isRequired,
+  setArticleNotFound: PropTypes.func.isRequired,
+  setArticleUnexpectedError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

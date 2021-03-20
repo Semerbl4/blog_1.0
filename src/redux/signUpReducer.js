@@ -1,4 +1,5 @@
-const initialValue = {
+/* eslint-disable no-param-reassign */
+const initialState = {
   username: '',
   email: '',
   password: '',
@@ -9,48 +10,47 @@ const initialValue = {
   unexpectedError: 0,
 };
 
-const signUpReducer = (state = initialValue, action) => {
-  const newState = { ...state };
-  newState.errors = { ...state.errors };
+const signUpReducer = (state = { ...initialState }, action) => {
+  // const newState = { ...state };
 
   switch (action.type) {
     case 'SET_UNEXPECTED_ERROR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     case 'SET_SIGN_UP_ERRORS':
-      newState.errors = { ...action.payload };
-      return newState;
+      state.errors = { ...action.payload };
+      return { ...state };
 
     case 'CLEAR_SIGN_UP_REDUCER':
-      for (const key in newState) {
+      for (const key in state) {
         if (key === 'signUpSucces') {
           // eslint-disable-next-line no-continue
           continue;
         }
-        newState.key = initialValue.key;
+        state.key = initialState.key;
       }
-      return newState;
+      return { ...state };
 
     case 'TOOGLE_SIGN_UP_AGREEMENT':
-      newState.agreement = !newState.agreement;
-      return newState;
+      state.agreement = !state.agreement;
+      return { ...state };
 
     case 'SET_SIGN_UP_EMAIL':
-      newState.email = action.payload;
-      return newState;
+      state.email = action.payload;
+      return { ...state };
 
     case 'SET_SIGN_UP_USERNAME':
-      newState.username = action.payload;
-      return newState;
+      state.username = action.payload;
+      return { ...state };
 
     case 'SIGN_UP_PASSWORD':
-      newState.password = action.payload;
-      return newState;
+      state.password = action.payload;
+      return { ...state };
 
     case 'SIGN_UP_REPEAT_PASSWORD':
-      newState.repeatPassword = action.payload;
-      return newState;
+      state.repeatPassword = action.payload;
+      return { ...state };
 
     default:
       return state;

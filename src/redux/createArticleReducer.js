@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const initialState = {
   typedInTag: '',
   tags: [],
@@ -5,42 +6,38 @@ const initialState = {
   unexpectedError: 0,
 };
 
-const createArticleReducer = (state = initialState, action) => {
-  const newState = { ...state };
-
+const createArticleReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'CLEAR_CREATE_ARTICLE_REDUCER':
       return initialState;
 
     case 'SET_CREATE_ARTICLE_UNEXPECTED_ERROR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     case 'SET_CREATE_ARTICLE_SUCCES':
-      newState.succes = true;
-      return newState;
+      state.succes = true;
+      return { ...state };
 
     case 'DELETE_LAST_TAG':
-      newState.tags.pop();
-      newState.tags = [...newState.tags];
-      return newState;
+      state.tags.pop();
+      return { ...state };
 
     case 'CLEAR_TYPED_IN_TAG':
-      newState.typedInTag = '';
-      return newState;
+      state.typedInTag = '';
+      return { ...state };
 
     case 'SET_TYPED_IN_TAG':
-      newState.typedInTag = action.payload;
-      return newState;
+      state.typedInTag = action.payload;
+      return { ...state };
 
     case 'ADD_TAG':
       if (Array.isArray(action.payload)) {
-        newState.tags = [...action.payload];
+        state.tags = [...action.payload];
       } else if (action.payload !== '') {
-        newState.tags = [...newState.tags, action.payload];
+        state.tags = [...state.tags, action.payload];
       }
-
-      return newState;
+      return { ...state };
 
     default:
       return state;
