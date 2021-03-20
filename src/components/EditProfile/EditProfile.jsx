@@ -7,23 +7,40 @@ import { Alert } from 'antd';
 
 import * as actions from '../../redux/actions';
 
+import { putUpdateUser } from '../../services/api';
+
 import EditProfileStyle from './EditProfile.module.scss';
 
 const EditProfile = ({
-  putUpdateUser,
   token,
   clearEditProfileReducer,
   hasBeenTakenError,
   unexpectedError,
   editProfileSucces,
+  setLogedUser,
+  setEditProfileSucces,
+  setEditProfileErrors,
+  setEditProfileUnexpectedError,
+  email,
+  username,
 }) => {
   useEffect(() => () => clearEditProfileReducer(), [clearEditProfileReducer]);
 
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    // console.dir(data)
-    // console.log(register)
-    putUpdateUser(data.username, data.email, data.newPassword, data.avatar, token);
+    putUpdateUser(data.username, data.email, data.newPassword, data.avatar, token)
+      .then((resolve) => {
+        setLogedUser(resolve);
+        setEditProfileSucces();
+      })
+      .catch((err) => {
+        const error = JSON.parse(err.message);
+        if (typeof error === 'object') {
+          setEditProfileErrors(error);
+        } else {
+          setEditProfileUnexpectedError(error);
+        }
+      });
   };
 
   return (
@@ -48,6 +65,7 @@ const EditProfile = ({
             type="text"
             name="username"
             placeholder="Username"
+            defaultValue={username}
             ref={register({ required: true })}
           />
           {errors.username && <p className={EditProfileStyle.inputValidError}>Username is required</p>}
@@ -62,9 +80,9 @@ const EditProfile = ({
             type="email"
             name="email"
             placeholder="Email adress"
-            ref={register({ required: true, pattern: { value: /^\S+@\S+$/i, message: 'Type in email adress' } })}
+            defaultValue={email}
+            ref={register({ pattern: { value: /^\S+@\S+$/i, message: 'Type in email adress' } })}
           />
-          {errors.email && <p className={EditProfileStyle.inputValidError}>Email is required</p>}
           {hasBeenTakenError.email && (
             <p className={EditProfileStyle.inputValidError}>{`Email ${hasBeenTakenError.email}`}</p>
           )}
@@ -78,7 +96,6 @@ const EditProfile = ({
             placeholder="New password"
             ref={register({ minLength: 8, maxLength: 40 })}
           />
-          {errors.password && <p className={EditProfileStyle.inputValidError}>Password is required</p>}
         </label>
         <label className={EditProfileStyle.inputContainer}>
           <span className={EditProfileStyle.inputTitle}>Avatar image (url)</span>
@@ -103,16 +120,23 @@ const EditProfile = ({
 };
 
 EditProfile.propTypes = {
-  putUpdateUser: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   clearEditProfileReducer: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   hasBeenTakenError: PropTypes.object.isRequired,
   unexpectedError: PropTypes.number.isRequired,
   editProfileSucces: PropTypes.bool.isRequired,
+  setLogedUser: PropTypes.func.isRequired,
+  setEditProfileSucces: PropTypes.func.isRequired,
+  setEditProfileErrors: PropTypes.func.isRequired,
+  setEditProfileUnexpectedError: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  username: state.logedUserReducer.user.username,
+  email: state.logedUserReducer.user.email,
   token: state.logedUserReducer.user.token,
   hasBeenTakenError: state.editProfileReducer.errors,
   unexpectedError: state.editProfileReducer.unexpectedError,

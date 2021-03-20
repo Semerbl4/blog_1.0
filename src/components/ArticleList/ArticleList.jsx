@@ -5,15 +5,37 @@ import PropTypes from 'prop-types';
 import { Pagination, Spin } from 'antd';
 
 import Article from '../Article/Article';
+
+import { getArticlesForPage } from '../../services/api';
+
 import * as actions from '../../redux/actions';
 
 import articleListStyle from './ArticleList.module.scss';
 import 'antd/dist/antd.css';
 
-const ArticleList = ({ currentPage, articles, setPage, getArticlesForPage, articlesLoading }) => {
+const ArticleList = ({
+  currentPage,
+  articles,
+  setPage,
+  //  getArticlesForPage,
+  articlesLoading,
+  setArticlesLoading,
+  setArticlesForPage,
+  setErrGetArtForPage,
+}) => {
   useEffect(() => {
-    getArticlesForPage(currentPage);
-  }, [currentPage, getArticlesForPage]);
+    setArticlesLoading();
+    getArticlesForPage(currentPage)
+      .then((resp) => {
+        console.log(resp);
+        setArticlesLoading();
+        setArticlesForPage(resp);
+      })
+      .catch(() => {
+        setArticlesLoading();
+        setErrGetArtForPage();
+      });
+  }, [currentPage, setArticlesLoading, setArticlesForPage, setErrGetArtForPage]);
 
   const createArticles = (stateArticles) => {
     const arrOfArticles = stateArticles.map((el) => (
@@ -34,8 +56,8 @@ const ArticleList = ({ currentPage, articles, setPage, getArticlesForPage, artic
   };
 
   return (
-    <div id="ArticleListContainer">
-      {articlesLoading && <Spin id="spiner" size="large" className="ArticleListContainer__spiner" />}
+    <div className={articleListStyle.container}>
+      {articlesLoading && <Spin id="spiner" size="large" className={articleListStyle.spiner} />}
       <ul type="none" className={articleListStyle.articleList}>
         {articles.length > 0 && !articlesLoading && createArticles(articles)}
       </ul>
@@ -59,8 +81,10 @@ ArticleList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   articles: PropTypes.array.isRequired,
   setPage: PropTypes.func.isRequired,
-  getArticlesForPage: PropTypes.func.isRequired,
   articlesLoading: PropTypes.bool.isRequired,
+  setArticlesLoading: PropTypes.func.isRequired,
+  setArticlesForPage: PropTypes.func.isRequired,
+  setErrGetArtForPage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

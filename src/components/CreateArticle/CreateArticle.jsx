@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 import { Alert } from 'antd';
 
+import { postCreateArticle, putUpdateArticle } from '../../services/api';
+
 import * as actions from '../../redux/actions';
 
 import 'antd/dist/antd.css';
@@ -17,7 +19,6 @@ const CreateArticle = ({
   setTypedInTag,
   clearTypedInTag,
   deleteLastTag,
-  postCreateArticle,
   typedInTag,
   tags,
   token,
@@ -25,13 +26,14 @@ const CreateArticle = ({
   succes,
   unexpectedError,
   article,
-  putUpdateArticle,
   clearCreateArticleReducer,
   match,
+  setCreateArticleSucces,
+  setCreateArticleUnexpectedError,
 }) => {
   const { body, description, title, tagList } = article;
-  
-  const [ submitDisabled, setSubmitDisabled ] = useState(false)
+
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   useEffect(() => {
     clearCreateArticleReducer();
@@ -56,11 +58,15 @@ const CreateArticle = ({
   const addTagButton = cn(CreateArticleStyles.tagButtonsCommon, CreateArticleStyles.addTagButton);
 
   const onSubmit = (data) => {
-    setSubmitDisabled(true)
+    setSubmitDisabled(true);
     if (Object.keys(article).length > 0) {
-      putUpdateArticle(data.title, data.description, data.text, tags, match.params.slug, token);
+      putUpdateArticle(data.title, data.description, data.text, tags, match.params.slug, token)
+        .then(setCreateArticleSucces)
+        .catch((reject) => setCreateArticleUnexpectedError(+reject.message));
     } else {
-      postCreateArticle(data.title, data.description, data.text, tags, token);
+      postCreateArticle(data.title, data.description, data.text, tags, token)
+        .then(setCreateArticleSucces)
+        .catch((reject) => setCreateArticleUnexpectedError(+reject.message));
     }
   };
 
@@ -158,7 +164,7 @@ const CreateArticle = ({
             title="add writen tag"
           />
         </div>
-        <input className={CreateArticleStyles.submit} type="submit" value="Send" disabled={submitDisabled}/>
+        <input className={CreateArticleStyles.submit} type="submit" value="Send" disabled={submitDisabled} />
       </form>
     </div>
   );
@@ -174,7 +180,6 @@ CreateArticle.propTypes = {
   setTypedInTag: PropTypes.func.isRequired,
   deleteLastTag: PropTypes.func.isRequired,
   clearTypedInTag: PropTypes.func.isRequired,
-  postCreateArticle: PropTypes.func.isRequired,
   typedInTag: PropTypes.string.isRequired,
   token: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
@@ -185,10 +190,11 @@ CreateArticle.propTypes = {
   unexpectedError: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   article: PropTypes.object,
-  putUpdateArticle: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object.isRequired,
   clearCreateArticleReducer: PropTypes.func.isRequired,
+  setCreateArticleSucces: PropTypes.func.isRequired,
+  setCreateArticleUnexpectedError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

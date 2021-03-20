@@ -11,8 +11,6 @@ import ava from '../../imgs/Ava.png';
 import headerRSStyle from './HeaderRightSide.module.scss';
 
 const HeaderRightSide = ({ user, deleteLoggedUser }) => {
-  // console.log(user.image)
-
   const SIClasses = cn(headerRSStyle.button, headerRSStyle.buttonSI);
   const SUClasses = cn(headerRSStyle.button, headerRSStyle.buttonSU);
   const buttonLOClasses = cn(headerRSStyle.button, headerRSStyle.buttonLO);

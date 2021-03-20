@@ -1,3 +1,8 @@
+.container {
+  min-height: 80vh;
+  border: solid 0.1px transparent;
+}
+
 .articleList {
   margin: 0;
   padding: 0;
@@ -34,10 +39,13 @@
   background-color: transparent;
 }
 
-:global(#ArticleListContainer > .ArticleListContainer__spiner) {
-  margin-top: 40px;
-  margin-left: 50px;
-  margin-right: auto;
-  transform: scale(2);
-  display: block;
+.spiner {
+  margin-top: 25% !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+:global(.ant-spin-lg) {
+  padding-top: 5px !important;
+  transform: scale(2) !important;
 }

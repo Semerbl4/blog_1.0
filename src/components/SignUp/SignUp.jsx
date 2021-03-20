@@ -8,6 +8,8 @@ import cn from 'classnames';
 
 import { Alert } from 'antd';
 
+import { postSignUp } from '../../services/api';
+
 import * as actions from '../../redux/actions';
 
 import SignUpStyle from './SignUp.module.scss';
@@ -18,7 +20,6 @@ const SignUp = ({
   setSignUpPassword,
   setSignUpRepeatPassword,
   toogleAgreement,
-  postSignUp,
   clearSignUpReducer,
   username,
   email,
@@ -29,6 +30,10 @@ const SignUp = ({
   errors,
   unexpectedError,
   user,
+  setLogedUser,
+  setEditProfileSucces,
+  setUnexpectedError,
+  setSignUpErrors,
 }) => {
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
@@ -42,10 +47,19 @@ const SignUp = ({
   const submitForm = (ev) => {
     ev.preventDefault();
     if (repeatPassword === password && agreement) {
-      // console.log(repeatPassword, password)
-      postSignUp(username, email, password);
-      // clearSignUpReducer()
-      // history.push('/')
+      postSignUp(username, email, password)
+        .then((resolve) => {
+          setLogedUser(resolve);
+          setEditProfileSucces();
+        })
+        .catch((err) => {
+          const error = JSON.parse(err.message);
+          if (typeof error === 'object') {
+            setSignUpErrors(error);
+          } else {
+            setUnexpectedError(error);
+          }
+        });
     }
   };
 
@@ -150,7 +164,7 @@ const SignUp = ({
           <span className={customCheckbox(agreement)} />
           <p className={SignUpStyle.agreement}>I agree to the processing of my personal information</p>
         </label>
-        <input className={SignUpStyle.login} type="submit" value="Create" />
+        <input className={SignUpStyle.login} type="submit" value="Create" disabled={!agreement} />
         <p className={SignUpStyle.signInOffer}>
           Already have an account?
           <Link to="/sign-in" className={SignUpStyle.redirect}>
@@ -175,7 +189,6 @@ SignUp.propTypes = {
   setSignUpPassword: PropTypes.func.isRequired,
   setSignUpRepeatPassword: PropTypes.func.isRequired,
   clearSignUpReducer: PropTypes.func.isRequired,
-  postSignUp: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -184,6 +197,10 @@ SignUp.propTypes = {
   unexpectedError: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.object.isRequired,
+  setLogedUser: PropTypes.func.isRequired,
+  setEditProfileSucces: PropTypes.func.isRequired,
+  setUnexpectedError: PropTypes.func.isRequired,
+  setSignUpErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

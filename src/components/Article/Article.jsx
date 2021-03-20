@@ -18,7 +18,7 @@ import * as actions from '../../redux/actions';
 
 import articleStyle from './Article.module.scss';
 
-// import ava from '../../imgs/Ava.png'
+import { deleteArticle, postFavoriteArticle } from '../../services/api';
 
 const Article = ({
   title,
@@ -30,7 +30,7 @@ const Article = ({
   slug,
   body,
   logedUsername,
-  deleteArticle,
+  // deleteArticle,
   match,
   token,
   errorDeleteArticle,
@@ -39,8 +39,9 @@ const Article = ({
   toogleShowDeleteConfirm,
   showConfirm,
   clearDeleteArticleReducer,
-  postFavoriteArticle,
   favorited,
+  setDeleteArticleSucces,
+  setDeleteArticleErr,
 }) => {
   const [userFavorited, setUserFavorited] = useState(favorited);
   const [userFavoritsCount, setUserFavotitsCount] = useState(favoritesCount);
@@ -74,7 +75,9 @@ const Article = ({
     return month;
   };
 
-  // console.log(errorDeleteArticle)
+  const cutDescripton = () => description.split('').slice(0, 231).join('');
+
+  // console.log(deleteArticle)
 
   return (
     <div className={articleStyle.article}>
@@ -96,6 +99,7 @@ const Article = ({
           <div className={articleStyle.likesContainer}>
             <button
               type="button"
+              disabled={!token}
               onClick={() => {
                 postFavoriteArticle(slug, token, userFavorited);
                 setUserFavorited((state) => !state);
@@ -114,7 +118,7 @@ const Article = ({
         <ul type="none" className={articleStyle.tags}>
           {tags()}
         </ul>
-        <p className={articleStyle.content}>{description.split('').slice(0, 231).join('')}</p>
+        <p className={articleStyle.content}>{cutDescripton()}</p>
         {body !== '' && (
           <p className={articleStyle.mainText}>
             <ReactMarkdown>{body}</ReactMarkdown>
@@ -143,17 +147,19 @@ const Article = ({
                 <button
                   type="button"
                   className={articleStyle.confirmBtnsCommon}
-                  onClick={() => deleteArticle(slug, token)}
+                  onClick={() => {
+                    deleteArticle(slug, token)
+                      .then(() => setDeleteArticleSucces())
+                      .catch((err) => setDeleteArticleErr(+err.message));
+                  }}
                 >
                   Yes
                 </button>
               </div>
             </div>
           )}
-          <Link to={`/articles/${slug}/edit`}>
-            <button type="button" className={editBtnClasses}>
-              Edit
-            </button>
+          <Link to={`/articles/${slug}/edit`} className={editBtnClasses}>
+            <p>Edit</p>
           </Link>
         </div>
       )}
@@ -184,7 +190,7 @@ Article.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   match: PropTypes.object,
   token: PropTypes.string,
-  deleteArticle: PropTypes.func.isRequired,
+  // deleteArticle: PropTypes.func.isRequired,
   errorDeleteArticle: PropTypes.number.isRequired,
   deleteSucces: PropTypes.bool.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -192,8 +198,9 @@ Article.propTypes = {
   toogleShowDeleteConfirm: PropTypes.func.isRequired,
   showConfirm: PropTypes.bool.isRequired,
   clearDeleteArticleReducer: PropTypes.func.isRequired,
-  postFavoriteArticle: PropTypes.func.isRequired,
   favorited: PropTypes.bool.isRequired,
+  setDeleteArticleSucces: PropTypes.func.isRequired,
+  setDeleteArticleErr: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

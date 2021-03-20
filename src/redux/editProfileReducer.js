@@ -1,27 +1,26 @@
-const initialValue = {
+/* eslint-disable no-param-reassign */
+const initialState = {
   errors: {},
   unexpectedError: 0,
   editProfileSucces: false,
 };
 
-const editProfileReducer = (state = initialValue, action) => {
-  const newState = { ...state };
-
+const editProfileReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'SET_EDIT_PROFILE_ERRORS':
-      newState.errors = action.payload;
-      return newState;
+      state.errors = action.payload;
+      return { ...state };
 
     case 'SET_EDIT_PROFILE_UNEXPECTED_ERROR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     case 'SET_EDIT_PROFILE_SUCCES':
-      newState.editProfileSucces = true;
-      return newState;
+      state.editProfileSucces = true;
+      return { ...state };
 
     case 'CLEAR_EDIT_PROFILE_REDUCER':
-      return initialValue;
+      return initialState;
 
     default:
       return state;

@@ -1,28 +1,27 @@
-const initialValue = {
+/* eslint-disable no-param-reassign */
+const initialState = {
   article: {},
   notFound: false,
   unexpectedError: 0,
 };
 
-const openedArticleReducer = (state = initialValue, action) => {
-  let newState = { ...state };
-
+const openedArticleReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case 'SET_ARTICLE_UNEXPECTED_ERROR':
-      newState.unexpectedError = action.payload;
-      return newState;
+      state.unexpectedError = action.payload;
+      return { ...state };
 
     case 'SET_ARTICLE_NOT_FOUND':
-      newState.notFound = true;
-      return newState;
+      state.notFound = true;
+      return { ...state };
 
     case 'CLEAR_ARTICLE':
-      newState = { ...initialValue };
-      return newState;
+      state = { ...initialState };
+      return { ...state };
 
     case 'SET_ARTICLE':
-      newState.article = { ...action.payload };
-      return newState;
+      state.article = { ...action.payload };
+      return { ...state };
 
     default:
       return state;

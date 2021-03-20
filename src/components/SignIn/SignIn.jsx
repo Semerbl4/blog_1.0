@@ -12,9 +12,7 @@ import SignInStyle from './SignIn.module.scss';
 const SignIn = ({ postSignIn, passOrEmailIncorrect, unexpectedError, history, user, cleanSignInReducer }) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    // console.log(data.password)
     postSignIn(data.email, data.password);
-    // history.push('/')
   };
 
   useEffect(() => {
