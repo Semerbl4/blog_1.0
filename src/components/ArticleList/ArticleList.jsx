@@ -22,10 +22,11 @@ const ArticleList = ({
   setArticlesLoading,
   setArticlesForPage,
   setErrGetArtForPage,
+  token
 }) => {
   useEffect(() => {
     setArticlesLoading();
-    getArticlesForPage(currentPage)
+    getArticlesForPage(currentPage, token)
       .then((resp) => {
         console.log(resp);
         setArticlesLoading();
@@ -35,7 +36,7 @@ const ArticleList = ({
         setArticlesLoading();
         setErrGetArtForPage();
       });
-  }, [currentPage, setArticlesLoading, setArticlesForPage, setErrGetArtForPage]);
+  }, [currentPage, setArticlesLoading, setArticlesForPage, setErrGetArtForPage, token]);
 
   const createArticles = (stateArticles) => {
     const arrOfArticles = stateArticles.map((el) => (
@@ -76,6 +77,10 @@ const ArticleList = ({
   );
 };
 
+ArticleList.defaultProps = {
+  token: '',
+} 
+
 ArticleList.propTypes = {
   currentPage: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -85,12 +90,14 @@ ArticleList.propTypes = {
   setArticlesLoading: PropTypes.func.isRequired,
   setArticlesForPage: PropTypes.func.isRequired,
   setErrGetArtForPage: PropTypes.func.isRequired,
+  token: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   currentPage: state.mainReducer.currentPage,
   articles: state.mainReducer.articles,
   articlesLoading: state.mainReducer.articlesLoading,
+  token: state.logedUserReducer.user.token,
 });
 
 export default connect(mapStateToProps, actions)(ArticleList);

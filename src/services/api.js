@@ -24,17 +24,28 @@ export const getArticle = async (slug) => {
   throw new Error(resp.status);
 };
 
-export const getArticlesForPage = async (page) => {
-  // dispatch(setArticlesLoading());
+export const getArticlesForPage = async (page, token) => {
+
+  const fetchOptions = {}
+  if (token) {
+    fetchOptions.headers = {
+      'Content-type': 'application/json; charset=utf-8',
+      Authorization: `Token ${token}`,
+    }
+  }
+
   let skippedArticles = 0;
   if (page > 1) {
     skippedArticles = 10 * (page - 1);
   }
-  let resp = await fetch(`https://conduit.productionready.io/api/articles?limit=10&offset=${skippedArticles}`);
+
+  let resp = await fetch(`https://conduit.productionready.io/api/articles?limit=10&offset=${skippedArticles}`, fetchOptions);
   if (resp.ok) {
     resp = await resp.json();
     return resp.articles;
   }
+  resp = await resp.json();
+  console.log(resp)
   throw new Error();
 };
 
