@@ -1,4 +1,4 @@
-## https://blog-app-qy2zbyo1v-semerbl4.vercel.app/ - ссылка на проект (здесь можно потыкать)
+## https://blog-app-lemon.vercel.app/ - ссылка на проект (здесь можно потыкать)
 
 # Getting Started with Create React App
 
