@@ -22,10 +22,11 @@ const OpenedArticle = ({
   setArticle,
   setArticleNotFound,
   setArticleUnexpectedError,
+  token,
 }) => {
   useEffect(() => {
     clearArticle();
-    getArticle(match.params.slug)
+    getArticle(match.params.slug, token)
       .then((resp) => setArticle(resp.article))
       .catch((err) => {
         console.log(err);
@@ -70,6 +71,10 @@ const OpenedArticle = ({
   return <Spin id="spiner" size="large" className={openedArticleStyles.spiner} />;
 };
 
+OpenedArticle.defaultProps = {
+  token: '',
+}
+
 OpenedArticle.propTypes = {
   clearArticle: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
@@ -81,12 +86,14 @@ OpenedArticle.propTypes = {
   setArticle: PropTypes.func.isRequired,
   setArticleNotFound: PropTypes.func.isRequired,
   setArticleUnexpectedError: PropTypes.func.isRequired,
+  token: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   article: state.openedArticleReducer.article,
   notFound: state.openedArticleReducer.notFound,
   unexpectedError: state.openedArticleReducer.unexpectedError,
+  token: state.logedUserReducer.user.token,
 });
 
 export default withRouter(connect(mapStateToProps, actions)(OpenedArticle));

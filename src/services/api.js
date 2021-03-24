@@ -13,8 +13,17 @@ export const deleteArticle = async (slug, token) => {
   throw new Error(resp.status);
 };
 
-export const getArticle = async (slug) => {
-  let resp = await fetch(`https://conduit.productionready.io/api/articles/${slug}`);
+export const getArticle = async (slug, token) => {
+
+  const fetchOptions = {}
+  if (token) {
+    fetchOptions.headers = {
+      'Content-type': 'application/json; charset=utf-8',
+      Authorization: `Token ${token}`,
+    }
+  }
+
+  let resp = await fetch(`https://conduit.productionready.io/api/articles/${slug}`, fetchOptions);
 
   if (resp.ok) {
     resp = await resp.json();
